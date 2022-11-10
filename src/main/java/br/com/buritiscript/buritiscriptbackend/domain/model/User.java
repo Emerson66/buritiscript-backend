@@ -7,11 +7,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "user_table")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,5 +38,6 @@ public class User {
     private String twitter;
     private String instagram;
     private String linkedin;
+    
 
 }
