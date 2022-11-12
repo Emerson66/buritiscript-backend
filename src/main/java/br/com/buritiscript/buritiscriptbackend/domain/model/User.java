@@ -33,11 +33,29 @@ public class User {
     @NotBlank
     private String email;
     private String website;
+
+    
+    public User(@NotBlank String username, @NotBlank String password, @NotBlank String name, String about, char sexo,
+            @Email @NotBlank String email, String website, String github, String telegram, String twitter,
+            String instagram, String linkedin) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.about = about;
+        this.sexo = sexo;
+        this.email = email;
+        this.website = website;
+        this.github = github;
+        this.telegram = telegram;
+        this.twitter = twitter;
+        this.instagram = instagram;
+        this.linkedin = linkedin;
+    }
     private String github;
     private String telegram;
     private String twitter;
     private String instagram;
     private String linkedin;
     
-
+    
 }
