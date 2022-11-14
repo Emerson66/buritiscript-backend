@@ -1,5 +1,6 @@
 package br.com.buritiscript.buritiscriptbackend.controller;
 
+import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -26,17 +27,14 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<User> register(@RequestBody @Valid UserForm userform){
+    public ResponseEntity<User> register(@RequestBody @Valid UserForm userform) {
         User user = userform.userConverterToModel();
         userRepository.save(user);
         return ResponseEntity.ok().build();
     }
 
-    // @PostMapping("/v2")
-    // @Transactional
-    // public ResponseEntity<User> register(@RequestBody @Valid User user){
-
-    //     userRepository.save(user);
-    //     return ResponseEntity.ok().build();
-    // }
+    public List<User> list() {
+        
+        return list();
+    }
 }

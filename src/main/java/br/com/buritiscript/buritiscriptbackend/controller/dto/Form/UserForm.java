@@ -43,8 +43,6 @@ public class UserForm {
         this.linkedin = linkedin;
     }
 
-    
-
     public User userConverterToModel() {
         return new User(this.username, this.password, this.name, this.about, this.sexo, this.email,
         this.website, this.github, this.telegram, this.twitter, this.instagram, this.linkedin);
@@ -53,7 +51,4 @@ public class UserForm {
     @Deprecated
     public UserForm() {
     }
-
-    
-
 }
