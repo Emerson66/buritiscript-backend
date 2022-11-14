@@ -1,21 +1,42 @@
 package br.com.buritiscript.buritiscriptbackend.controller;
 
+
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.buritiscript.buritiscriptbackend.controller.dto.UserForm;
+import br.com.buritiscript.buritiscriptbackend.controller.dto.Form.UserForm;
 import br.com.buritiscript.buritiscriptbackend.domain.model.User;
+import br.com.buritiscript.buritiscriptbackend.repository.UserRepository;
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/users")
 public class UserController {
-    
-    @PostMapping
-    public ResponseEntity<User> register(@RequestBody UserForm userform){
-        
-        return null;
+
+    private UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
+
+    @PostMapping
+    @Transactional
+    public ResponseEntity<User> register(@RequestBody @Valid UserForm userform){
+        User user = userform.userConverterToModel();
+        userRepository.save(user);
+        return ResponseEntity.ok().build();
+    }
+
+    // @PostMapping("/v2")
+    // @Transactional
+    // public ResponseEntity<User> register(@RequestBody @Valid User user){
+
+    //     userRepository.save(user);
+    //     return ResponseEntity.ok().build();
+    // }
 }

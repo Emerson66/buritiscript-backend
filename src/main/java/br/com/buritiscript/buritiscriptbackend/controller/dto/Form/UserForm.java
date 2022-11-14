@@ -1,4 +1,4 @@
-package br.com.buritiscript.buritiscriptbackend.controller.dto;
+package br.com.buritiscript.buritiscriptbackend.controller.dto.Form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -43,9 +43,17 @@ public class UserForm {
         this.linkedin = linkedin;
     }
 
+    
+
     public User userConverterToModel() {
         return new User(this.username, this.password, this.name, this.about, this.sexo, this.email,
         this.website, this.github, this.telegram, this.twitter, this.instagram, this.linkedin);
     }
+
+    @Deprecated
+    public UserForm() {
+    }
+
+    
 
 }
