@@ -39,4 +39,10 @@ public class UserController {
     public List<UserListResponse> list() {
         return UserListResponse.userListConvertToModel(userRepository);
     }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUser(){
+        
+        return null;
+    }
 }
