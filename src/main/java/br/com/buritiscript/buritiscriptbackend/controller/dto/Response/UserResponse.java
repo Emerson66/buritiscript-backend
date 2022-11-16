@@ -1,5 +1,8 @@
 package br.com.buritiscript.buritiscriptbackend.controller.dto.Response;
 
+import java.util.Optional;
+
+import br.com.buritiscript.buritiscriptbackend.domain.model.User;
 import br.com.buritiscript.buritiscriptbackend.repository.UserRepository;
 import lombok.Getter;
 
@@ -19,18 +22,17 @@ public class UserResponse {
 
     
 
-    public UserResponse(String username, String name, String about, String email, String website, String github,
-            String telegram, String twitter, String instagram, String linkedin) {
-        this.username = username;
-        this.name = name;
-        this.about = about;
-        this.email = email;
-        this.website = website;
-        this.github = github;
-        this.telegram = telegram;
-        this.twitter = twitter;
-        this.instagram = instagram;
-        this.linkedin = linkedin;
+    public UserResponse(User user) {
+        this.username = user.getUsername();
+        this.name = user.getName();
+        this.about = user.getAbout();
+        this.email = user.getEmail();
+        this.website = user.getWebsite();
+        this.github = user.getGithub();
+        this.telegram = user.getTelegram();
+        this.twitter = user.getTwitter();
+        this.instagram = user.getInstagram();
+        this.linkedin = user.getLinkedin();
     }
 
     @Deprecated
@@ -38,8 +40,11 @@ public class UserResponse {
 
     public UserResponse convertToModel(UserRepository userRepository, String username){
 
-        
-
-        return null;
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()){
+            return new UserResponse(user.get());
+        }else{
+            return null;
+        }
     }
 }
