@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.buritiscript.buritiscriptbackend.controller.dto.Form.UserForm;
 import br.com.buritiscript.buritiscriptbackend.controller.dto.Response.UserListResponse;
+import br.com.buritiscript.buritiscriptbackend.controller.dto.Response.UserResponse;
 import br.com.buritiscript.buritiscriptbackend.domain.model.User;
 import br.com.buritiscript.buritiscriptbackend.repository.UserRepository;
 
@@ -41,8 +43,13 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<User> getUser(){
+    public ResponseEntity<UserResponse> getUser(@PathVariable String username){
         
-        return null;
+        UserResponse.convertToModel(userRepository, username);
+        return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<Void> delete(){
+        return ResponseEntity.noContent().build();
     }
 }
