@@ -1,6 +1,7 @@
 package br.com.buritiscript.buritiscriptbackend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -43,13 +44,17 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable String username){
-        
-        UserResponse.convertToModel(userRepository, username);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UserResponse> getUser(@PathVariable String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return ResponseEntity.ok().body(new UserResponse(user.get()));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
-    public ResponseEntity<Void> delete(){
+    public ResponseEntity<Void> delete() {
         return ResponseEntity.noContent().build();
     }
 }

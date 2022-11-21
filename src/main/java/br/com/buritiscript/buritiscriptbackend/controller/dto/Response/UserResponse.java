@@ -38,13 +38,4 @@ public class UserResponse {
     @Deprecated
     public UserResponse() {}
 
-    public static UserResponse convertToModel(UserRepository userRepository, String username){
-
-        Optional<User> user = userRepository.findByUsername(username);
-        if(user.isPresent()){
-            return new UserResponse(user.get());
-        }else{
-            return null;
-        }
-    }
 }
